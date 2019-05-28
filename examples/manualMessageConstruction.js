@@ -1,4 +1,4 @@
-const converter =  require("@iota/converter") //require("iota.lib.js/lib/crypto/converter/converter")
+const converter =  require("@iota/converter")
 const merkle = require('../lib/merkle')
 const sign = require('../lib/sign')
 const sender = require('../lib/message')
@@ -6,7 +6,7 @@ const file = require('../lib/file')
 const {intToTrytes, padTritsMultipleOf, digest} = require('../lib/helpers')
 const fs = require('fs')
 const iota = require('@iota/core').composeAPI({
-    provider: 'https://nodes.devnet.iota.org'
+    provider: 'https://node.deviceproof.org'
 });
 
 (async () => {

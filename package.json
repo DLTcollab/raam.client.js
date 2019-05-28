@@ -1,7 +1,7 @@
 {
   "name": "raam.client.js",
   "version": "0.8.0",
-  "description": "A messaging protocol for the IOTA tangle allowing access of arbitrary messages in O(1)",
+  "description": "IOTA-based messaging protocol, allowing access of arbitrary messages in O(1)",
   "keywords": [
     "iota",
     "dlt",
@@ -16,17 +16,16 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/cr0ssing/raam.client.js"
+    "url": "https://github.com/DLTcollab/raam.client.js"
   },
   "author": {
-    "name": "Robin Lamberti",
-    "email": "lamberti.robin@gmail.com"
+    "name": "Robin Lamberti"
   },
   "license": "ISC",
   "main": "lib/raam.js",
   "types": "types/index.d.ts",
   "scripts": {
-    "docs": "jsdoc2md -t jsdoc2md/api.hbs lib/raam.js lib/raamReader.js > docs/api.md"
+    "docs": "jsdoc2md -t docs/api.hbs lib/raam.js lib/raamReader.js > docs/api.md"
   },
   "dependencies": {
     "@iota/core": "1.0.0-beta.11",
@@ -45,7 +44,7 @@
     "zeromq": "^5.1.0"
   },
   "devDependencies": {
-    "jsdoc-to-markdown": "^4.0.1",
+    "jsdoc-to-markdown": "^5.0.0",
     "marked": "^0.6.2",
     "mocha": "^5.2.0"
   }

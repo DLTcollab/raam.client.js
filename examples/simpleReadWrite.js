@@ -2,7 +2,7 @@ const RAAM = require('../lib/raam')
 const converter =  require("@iota/converter")
 const RAAMReader = require('../lib/raamReader')
 const iota = require('@iota/core').composeAPI({
-    provider: 'https://nodes.devnet.iota.org'
+    provider: 'https://node.deviceproof.org'
 });
 
 (async () => {

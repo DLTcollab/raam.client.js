@@ -1,5 +1,3 @@
-[![npm](https://img.shields.io/npm/v/raam.client.js.svg)](https://www.npmjs.com/package/raam.client.js)
-
 # RAAM - Random Access Authenticated Messaging
 RAAM is a second layer data communication protocol for IOTA
 enableing protected datastream access and publishing, organized in so called channels.
@@ -40,7 +38,7 @@ writing from/to RAAM channels.
 ```js
 const RAAM = require('raam.client.js')
 const iota = require('@iota/core').composeAPI({
-    provider: 'https://nodes.devnet.iota.org'
+    provider: 'https://node.deviceproof.org'
 })
 const seed = "DONTGIVEYOURSEEDTOANYBODYELSEDONTGIVEYOURSEEDTOANYBODYELSEDONTGIVEYOURSEEDTOANYBODYELSE"
 const raam = await RAAM.fromSeed(seed, {height: 4, iota})
@@ -80,7 +78,3 @@ to ensure that two different messages in the same channel belong to the same aut
 
 Because of that the maximum amount of messages that can be published in a channel depends on the size of a merkle tree, 
 which has to be created in advance.
-
-* * *
-
-&copy; 2018 Robin Lamberti \<lamberti.robin@gmail.com\>.
