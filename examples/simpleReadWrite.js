@@ -5,6 +5,16 @@ const iota = require('@iota/core').composeAPI({
   provider: 'https://node.deviceproof.org',
 });
 
+function generateSeed(length = 81) {
+  const charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ9';
+  const retVal = [81];
+  for (let i = 0, n = charset.length; i < length; ++i) {
+    retVal[i] = charset.charAt(Math.floor(Math.random() * n));
+  }
+  const result = retVal.join('');
+  return result;
+}
+
 (async () => {
   try {
     const messagePasswords = ['KUCHEN', 'MEHRKUCHEN', 'NOCHMEHRKUCHEN'];
@@ -17,7 +27,7 @@ const iota = require('@iota/core').composeAPI({
 
     console.log('Generated RAAM channel. Reading channel...');
     const { messages, errors } = await raam.syncChannel({
-      callback: (err, m) => {
+      callback: (err) => {
         if (err) {
           console.error(err);
         }
@@ -30,8 +40,14 @@ const iota = require('@iota/core').composeAPI({
 
     console.log('Publishing 2 messages...');
     console.log('Bundle 1:', (await raam.publish('HELLOIOTA', { messagePassword: messagePasswords[0] }))[0].bundle);
-    const { channelRoot: nextRoot } = await RAAM.fromSeed(generateSeed(), { security: 1, height: 2 });
-    console.log('Bundle 2:', (await raam.publish('', { index: 3, messagePassword: messagePasswords[2], nextRoot }))[0].bundle);
+    const { channelRoot: nextRoot } = await RAAM.fromSeed(
+      generateSeed(),
+      { security: 1, height: 2 },
+    );
+    console.log(
+      'Bundle 2:',
+      (await raam.publish('', { index: 3, messagePassword: messagePasswords[2], nextRoot }))[0].bundle,
+    );
 
     let response = await raam.fetch({ end: 3, messagePasswords });
     console.log('Messages:', response.messages);
@@ -44,7 +60,8 @@ const iota = require('@iota/core').composeAPI({
     console.log('Branch messages:', response.messages);
 
     const reader = new RAAMReader(raam.channelRoot, { iota, channelPassword: 'PASSWORD' });
-    // fetching will stop after index 1 because it is empty and reader has no locally stored messages
+    // fetching will stop after index 1 because it is empty and reader has
+    // no locally stored messages
     // messages will be empty
     response = await reader.fetch({ start: 1, messagePasswords });
     console.log('Messages:', response.messages);
@@ -61,13 +78,3 @@ const iota = require('@iota/core').composeAPI({
     console.error(e);
   }
 })();
-
-function generateSeed(length = 81) {
-  const charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ9';
-  const retVal = [81];
-  for (let i = 0, n = charset.length; i < length; ++i) {
-    retVal[i] = charset.charAt(Math.floor(Math.random() * n));
-  }
-  const result = retVal.join('');
-  return result;
-}

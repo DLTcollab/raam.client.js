@@ -6,6 +6,16 @@ const iota = require('@iota/core').composeAPI({
   provider: 'https://node.deviceproof.org',
 });
 
+function generateSeed(length = 81) {
+  const charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ9';
+  const retVal = [81];
+  for (let i = 0, n = charset.length; i < length; ++i) {
+    retVal[i] = charset.charAt(Math.floor(Math.random() * n));
+  }
+  const result = retVal.join('');
+  return result;
+}
+
 (async () => {
   try {
     const seed = generateSeed();
@@ -17,7 +27,7 @@ const iota = require('@iota/core').composeAPI({
 
     console.log('Generated RAAM channel. Reading channel...');
     const { messages, errors } = await raam.syncChannel({
-      callback: (err, m) => {
+      callback: (err) => {
         if (err) {
           console.error(err);
         }
@@ -52,13 +62,3 @@ const iota = require('@iota/core').composeAPI({
     console.error(e);
   }
 })();
-
-function generateSeed(length = 81) {
-  const charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ9';
-  const retVal = [81];
-  for (let i = 0, n = charset.length; i < length; ++i) {
-    retVal[i] = charset.charAt(Math.floor(Math.random() * n));
-  }
-  const result = retVal.join('');
-  return result;
-}
