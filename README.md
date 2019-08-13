@@ -1,6 +1,6 @@
 # RAAM - Random Access Authenticated Messaging
 RAAM is a second layer data communication protocol for IOTA
-enableing protected datastream access and publishing, organized in so called channels.
+enabling protected data stream access and publishing, organized in so called channels.
 
 RAAM uses the same quantum proof signing scheme and hash function used in IOTA to sign transactions. 
 These techniques enable the construction of secure data channels providing data integrity and 
@@ -10,7 +10,7 @@ to a specific private audience. RAAM can be used without any changes to IOTA nod
 the IOTA network, because RAAM messages at their core are a set of zero-value transactions, confirming other 
 transactions on the tangle.
 
-The messages in a channel don't have to be accessed from first to last, but can be accessed in any random order in O(1).
+The messages in a channel do not have to be accessed from first to last, but can be accessed in any random order in O(1).
 For that only the channel id and the index of the message are needed.
 
 **Features**
