@@ -81,8 +81,9 @@ function verify(merkleRoot, sig, message, verifyingKey, index, authPathHashes, n
     );
     console.log('Bundle:', bundle[0].bundle);
 
-    // sleep two seconds
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    // sleep 1 second
+    await new Promise(resolve => setTimeout(resolve, 1000));
+
     console.log('Getting message...');
     const { message: tangleMessage, skipped } = await sender.getMessage(
       iota, merkleRoot, index,
