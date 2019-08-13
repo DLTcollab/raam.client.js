@@ -37,26 +37,39 @@ writing from/to RAAM channels.
 
 **Generating a new channel and publishing a message**  
 ```js
-const RAAM = require('raam.client.js')
+const RAAM = require('raam.client.js');
 const iota = require('@iota/core').composeAPI({
-    provider: 'https://node.deviceproof.org'
-})
-const seed = "DONTGIVEYOURSEEDTOANYBODYELSEDONTGIVEYOURSEEDTOANYBODYELSEDONTGIVEYOURSEEDTOANYBODYELSE"
-const raam = await RAAM.fromSeed(seed, {height: 4, iota})
+  provider: 'https://node.deviceproof.org'
+});
+const seed = "DONTGIVEYOURSEEDTOANYBODYELSEDONTGIVEYOURSEEDTOANYBODYELSEDONTGIVEYOURSEEDTOANYBODYELSE";
 
-await raam.publish("HELLOIOTA")
+(async () => {
+  try {
+    const raam = await RAAM.fromSeed(seed, { security: 1, height: 4, iota });
+    await raam.publish("HELLOIOTA");
+  } catch (e) {
+    console.error(e);
+  }
+})();
 ```
 
 **Reading from a channel**
 ```js
-const { RAAMReader } = require('raam.client.js')
-const channelId = "TIGXUEKKCGTOPNXEIGUYQCJUCODSVAXVHZRARCWRAOVCZKN9WDILGKRIDAXBJSACGDWTTVBEOIZHQTSYX"
-const raam = new RAAMReader(channelId, {iota})
-let response = await raam.fetch({index: 3})
-console.log(response.messages[0])
+const { RAAMReader } = require('raam.client.js');
+const iota = require('@iota/core').composeAPI({
+  provider: 'https://node.deviceproof.org',
+});
+const channelId = "Y9FFZOE9VAOJYBMBISYDMZDWVO9ITKX9WPKUN9AESERDXLHZFAQRNJLNH9QERJWFHFFRLNO9ODSTOAVOW";
+const raam = new RAAMReader(channelId, { iota });
 
-response = await raam.fetch({start: 0, end: 2})
-console.log(response.messages)
+(async () => {
+  try {
+    let response = await raam.fetch({start: 0, end: 2});
+    console.log(response.messages);
+  } catch (e) {
+    console.error(e);
+  }
+})();
 ```
 
 Take a look at the [API Reference](docs/api.md) to learn more.
